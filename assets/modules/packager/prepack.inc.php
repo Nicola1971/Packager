@@ -88,7 +88,6 @@ foreach ($elements as $element) {
 
     $filesFolders[$element] = array();
     $filesIgnored[$element] = array();
-    $ignoreFolders[$element] = array();
 
     $allFolders = glob($elPath . '*', GLOB_ONLYDIR);
 

@@ -54,6 +54,10 @@
         <item>
             <name>Forgot Manager Login</name>
         </item>
+        <item>
+            <folder>FileSource</folder>
+            <name>filesource</name>
+        </item>
     </category>
 
     <category>
@@ -95,14 +99,22 @@
             <folder>wayfinder</folder>
         </item>
         <item>
+            <name>WebSignup</name>
+        </item>
+        <item>
             <name>WebLogin</name>
             <folder>weblogin</folder>
         </item>
         <item>
+            <name>WebChangePwd</name>
+        </item>
+        <item>
             <name>MemberCheck</name>
+            <folder>membercheck</folder>
         </item>
         <item>
             <name>Personalize</name>
+            <folder>personalize</folder>
         </item>
         <item>
             <name>Breadcrumbs</name>
@@ -113,6 +125,14 @@
         <item>
             <name>UltimateParent</name>
             <folder>ultimateparent</folder>
+        </item>
+        <item>
+            <name>phpthumbphpthumb</name>
+            <folder>phpthumb</folder>
+        </item>
+        <item>
+            <name>WebChangePwdWebChangePwd</name>
+            <folder>WebChangePwd</folder>
         </item>
     </category>
 
