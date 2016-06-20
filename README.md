@@ -1,6 +1,5 @@
 Packager
 ========
-#Beta 1
 
 Tools to help create files and packages for MODX Evolution Package Manager and Extras modules
 
