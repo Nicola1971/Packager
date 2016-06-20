@@ -1,18 +1,18 @@
 <?php
 /***************************************************
 Prepack module logic
-v 0.5 Keith Penton, KP52, December 2013
+v 0.5.1 Keith Penton, KP52, June 2016
 
-adds selective creation of /files/ folder for supporting files
+adds test for empty elements in XML 'ignore' list
 ****************************************************/
 $fields = $_REQUEST;
 $modId = intval($fields['id']);
 $errMsgs = array();
 
 if (isset($formTpl)) {
-	$html = $modx->getChunk($formTpl);
+    $html = $modx->getChunk($formTpl);
 } else {
-	$html = file_get_contents(dirname(__FILE__) . '/select.html');
+    $html = file_get_contents(dirname(__FILE__) . '/select.html');
 }
 
 $exportDir = (!empty($fields['exportDir'])) ? $fields['exportDir'] : $exportDir;
@@ -34,17 +34,17 @@ $packageVersion = (!empty($fields['pkg_version'])) ? $fields['pkg_version'] : $p
 $validVersion = preg_match('#^\d.*#', $packageVersion) or die('Version number must begin with a digit');
 
 $stables = array(
-	'cats'       => $modx->getFullTableName('categories'),
-	'chunks'     => $modx->getFullTableName('site_htmlsnippets'),
-	'modules'    => $modx->getFullTableName('site_modules'),
-	'snippets'   => $modx->getFullTableName('site_snippets'),
-	'plugins'   => $modx->getFullTableName('site_plugins'),
-	'plugin_events'   => $modx->getFullTableName('site_plugin_events'),
+    'cats'       => $modx->getFullTableName('categories'),
+    'chunks'     => $modx->getFullTableName('site_htmlsnippets'),
+    'modules'    => $modx->getFullTableName('site_modules'),
+    'snippets'   => $modx->getFullTableName('site_snippets'),
+    'plugins'   => $modx->getFullTableName('site_plugins'),
+    'plugin_events'   => $modx->getFullTableName('site_plugin_events'),
     'event_names'   => $modx->getFullTableName('system_eventnames'),
-	'tvs'        => $modx->getFullTableName('site_tmplvars'),
-	'templates'  => $modx->getFullTableName('site_templates'),
-	'tv_ties'    => $modx->getFullTableName('site_tmplvar_templates'),
-	'settings'   => $modx->getFullTableName('system_settings')
+    'tvs'        => $modx->getFullTableName('site_tmplvars'),
+    'templates'  => $modx->getFullTableName('site_templates'),
+    'tv_ties'    => $modx->getFullTableName('site_tmplvar_templates'),
+    'settings'   => $modx->getFullTableName('system_settings')
 );
 
 // get category names into an indexed array
@@ -52,7 +52,7 @@ $cat_names = $modx->db->select('*', $stables['cats']);
 $cats = array(0 => 'uncategorized');
 
 while ($cat = $modx->db->getRow($cat_names)) {
-	$cats[$cat['id']] = $cat['category'];
+    $cats[$cat['id']] = $cat['category'];
 }
 
 $elements = array('chunks', 'modules', 'plugins', 'snippets', 'templates', 'tvs');
@@ -79,10 +79,10 @@ foreach ($elements as $element) {
     while ($el = $modx->db->getRow($all)) {
         $elName = isset($el['templatename']) ? $el['templatename'] : $el['name'];
 
-        if (!in_array($elName, $ignoreSet[$element])) {
-            $process[$element][] = $el;
-        } else {
+        if (!empty($ignoreSet[$element]) && in_array($elName, $ignoreSet[$element])) {
             $ignored[$element][] = $el;
+        } else {
+            $process[$element][] = $el;
         }
     }
 
@@ -92,11 +92,11 @@ foreach ($elements as $element) {
     $allFolders = glob($elPath . '*', GLOB_ONLYDIR);
 
     while ($folder = array_shift($allFolders)) {
-        if (!in_array($folder, $ignoreFolders[$element])) {
+        if (!empty($ignoreFolders[$element]) && in_array($folder, $ignoreFolders[$element])) {
+           $filesIgnored[$element][] = $folder;
+         } else {
             $filesFolders[$element][] = $folder;
-        } else {
-            $filesIgnored[$element][] = $folder;
-        }
+       }
     }
 
     if (empty($filesFolders[$element])) {
@@ -108,7 +108,7 @@ foreach ($elements as $element) {
 }
 
 if (isset($_REQUEST['Go'])) {
-	$fields = $_REQUEST;
+    $fields = $_REQUEST;
 
     // Process chunks
         while ($chunk = array_shift($process['chunks'])) {
@@ -169,7 +169,7 @@ if (isset($_REQUEST['Go'])) {
         $item = new PackageItem('plugin', $plugin['name'], $plugin['description'], $packageVersion);
 
         $item->tags['modx_category'] = $cats[$plugin['category']];
-    	$item->tags['properties'] = $plugin['properties'];
+        $item->tags['properties'] = $plugin['properties'];
 
         $item->code = $plugin['plugincode'];
 
@@ -201,7 +201,7 @@ if (isset($_REQUEST['Go'])) {
         echo $item->Write($destDir);
 
     // save template ID=>name pairs for TV assignments
-    	$templateNames[$template['id']] = $template['templatename'];
+        $templateNames[$template['id']] = $template['templatename'];
 
         unset($item);
     }
@@ -210,22 +210,22 @@ if (isset($_REQUEST['Go'])) {
     while ($tv = array_shift($process['tvs'])) {
         $item = new PackageItem('tv', $tv['name'], $tv['description'], $packageVersion);
 
-    	$item->tags['input_type'] = $tv['type'];
-    	$item->tags['caption'] = $tv['caption'];
-    	$item->tags['modx_category']  = $cats[$tv['category']];
-    	$item->tags['input_options'] = $tv['elements'];
-    	$item->tags['default'] = $tv['default_text'];
-    	$item->tags['output_widget'] = $tv['display'];
-    	$item->tags['output_widget_params'] = $tv['display_params'];
+        $item->tags['input_type'] = $tv['type'];
+        $item->tags['caption'] = $tv['caption'];
+        $item->tags['modx_category']  = $cats[$tv['category']];
+        $item->tags['input_options'] = $tv['elements'];
+        $item->tags['default'] = $tv['default_text'];
+        $item->tags['output_widget'] = $tv['display'];
+        $item->tags['output_widget_params'] = $tv['display_params'];
 
-    	$qString = 'tmplvarid = ' . $tv['id'];
-    	$assignments = $modx->db->select('templateid', $stables['tv_ties'], $qString);
+        $qString = 'tmplvarid = ' . $tv['id'];
+        $assignments = $modx->db->select('templateid', $stables['tv_ties'], $qString);
 
-    	$assigned = array();
+        $assigned = array();
 
-    	while ($templateId = $modx->db->getValue($assignments)) {
-    		$assigned[] = $templateNames[$templateId];
-    	}
+        while ($templateId = $modx->db->getValue($assignments)) {
+            $assigned[] = $templateNames[$templateId];
+        }
         $item->tags['template_assignments'] = implode(',', $assigned);
 
         $item->Package();
@@ -241,34 +241,34 @@ if (isset($_REQUEST['Go'])) {
 
         foreach ($fileSets as $fileSet) {
             preg_match('@.*(assets/.*)@', $fileSet, $matches);
-            $destDir = $packageDir . 'assets/' . $matches[1] ;
+            $destDir = $packageDir . $matches[1] ;
 
             PackageItem::rCopy($fileSet, $destDir);
             echo "Copied $fileSet to $destDir <br />\n";
         }
     }
 } else {
-	$showForm = true;
+    $showForm = true;
 }
 
 if ($showForm) {
-	$output = $html;
-	$ph = array(
+    $output = $html;
+    $ph = array(
         'modId' => $modId,
         'pkg_name' => $packageName,
         'pkg_version' => $packageVersion
-	);
+    );
 
-	if (count($errMsgs) > 0) {
-		$errorList = implode('<br />', $errMsgs);
-		$ph['errorList'] = '<p class="error">'. $errorList . "</p>\n";
-	}
+    if (count($errMsgs) > 0) {
+        $errorList = implode('<br />', $errMsgs);
+        $ph['errorList'] = '<p class="error">'. $errorList . "</p>\n";
+    }
 
-	foreach ($ph as $key => $value) {
-	   $output = str_replace("[+$key+]", $value, $output);
-	}
+    foreach ($ph as $key => $value) {
+       $output = str_replace("[+$key+]", $value, $output);
+    }
 
-	//	delete unresolved placeholders
-	$output = preg_replace('#(\[\+.*?\+\])#', '', $output);
+    //  delete unresolved placeholders
+    $output = preg_replace('#(\[\+.*?\+\])#', '', $output);
 }
 ?>
