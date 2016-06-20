@@ -3,22 +3,45 @@
     <category>
         <name>chunks</name>
         <item>
+            <name>mm_rules</name>
+        </item>
+        <item>
             <name>mm_demo_rules</name>
         </item>
         <item>
             <name>WebLoginSideBar</name>
         </item>
+        <item>
+            <name>ditto_blog</name>
+        </item>
+        <item>
+            <name>ContactForm</name>
+        </item>
+        <item>
+            <name>FormSignup</name>
+        </item>
     </category>
-
+    <category>
+        <name>tvs</name>
+        <item>
+            <name>blogContent</name>
+        </item>
+        <item>
+            <name>documentTags</name>
+        </item>
+        <item>
+            <name>loginName</name>
+        </item>
+    </category>
     <category>
         <name>modules</name>
         <item>
-            <name>DocManager</name>
+            <name>Doc Manager</name>
             <folder>docmanager</folder>
         </item>
         <item>
             <name>Extras</name>
-            <folder>extras</folder>
+            <folder>store</folder>
         </item>
     </category>
 
@@ -41,6 +64,14 @@
             <folder>qm</folder>
         </item>
         <item>
+            <name>FileSource</name>
+            <folder>filesource</folder>
+        </item>
+        <item>
+            <name>Forgot Manager Login</name>
+            <folder>forgotmanagerlogin</folder>
+        </item>
+        <item>
             <name>TinyMCE Rich Text Editor</name>
             <folder>tinymce</folder>
         </item>
@@ -53,10 +84,6 @@
         </item>
         <item>
             <name>Forgot Manager Login</name>
-        </item>
-        <item>
-            <folder>FileSource</folder>
-            <name>filesource</name>
         </item>
     </category>
 
@@ -99,18 +126,15 @@
             <folder>wayfinder</folder>
         </item>
         <item>
-            <name>WebSignup</name>
-        </item>
-        <item>
             <name>WebLogin</name>
             <folder>weblogin</folder>
         </item>
         <item>
-            <name>WebChangePwd</name>
+            <name>WebSignup</name>
         </item>
         <item>
             <name>MemberCheck</name>
-            <folder>membercheck</folder>
+        <folder>membercheck</folder>
         </item>
         <item>
             <name>Personalize</name>
@@ -118,22 +142,24 @@
         </item>
         <item>
             <name>Breadcrumbs</name>
+            <folder>breadcrumbs</folder>
         </item>
         <item>
             <name>FirstChildRedirect</name>
+            <folder>firstchildredirect</folder>
         </item>
         <item>
             <name>UltimateParent</name>
             <folder>ultimateparent</folder>
         </item>
         <item>
-            <name>phpthumbphpthumb</name>
-            <folder>phpthumb</folder>
-        </item>
+            <name>ListIndexer</name>
+            <folder>listindexer</folder>
+        </item> 
         <item>
-            <name>WebChangePwdWebChangePwd</name>
-            <folder>WebChangePwd</folder>
-        </item>
+            <name>phpthumb</name>
+            <folder>phpthumb</folder>
+        </item>  
     </category>
 
     <category>
