@@ -3,34 +3,49 @@
     <category>
         <name>chunks</name>
         <item>
-            <name>mm_rules</name>
+            <name>AjaxSearch_tplAjaxGrpResult</name>
         </item>
         <item>
-            <name>mm_demo_rules</name>
+            <name>AjaxSearch_tplAjaxResult</name>
         </item>
         <item>
-            <name>WebLoginSideBar</name>
+            <name>AjaxSearch_tplAjaxResults</name>
         </item>
         <item>
-            <name>ditto_blog</name>
+            <name>AjaxSearch_tplInput</name>
+        </item>
+        <item>
+            <name>Comments</name>
+        </item>
+        <item>
+            <name>Comments_tplForm</name>
         </item>
         <item>
             <name>ContactForm</name>
         </item>
         <item>
-            <name>FormSignup</name>
+            <name>ContactFormReport</name>
+        </item>
+        <item>
+            <name>mm_rules</name>
+        </item>
+        <item>
+            <name>header</name>
         </item>
     </category>
     <category>
         <name>tvs</name>
         <item>
-            <name>blogContent</name>
+            <name>desc</name>
         </item>
         <item>
-            <name>documentTags</name>
+            <name>keyw</name>
         </item>
         <item>
-            <name>loginName</name>
+            <name>noIndex</name>
+        </item>
+        <item>
+            <name>titl</name>
         </item>
     </category>
     <category>
@@ -56,8 +71,8 @@
             <name>ManagerManager</name>
         </item>
         <item>
-        <name>PHx</name>
-        <folder>phx</folder>
+        <name>ElementsInTree</name>
+        <folder>elementsintree</folder>
         </item>
         <item>
             <name>Quick Manager+</name>
@@ -72,38 +87,41 @@
             <folder>forgotmanagerlogin</folder>
         </item>
         <item>
-            <name>TinyMCE Rich Text Editor</name>
-            <folder>tinymce</folder>
+            <name>TinyMCE4</name>
+            <folder>tinymce4</folder>
         </item>
         <item>
             <name>TransAlias</name>
             <folder>transalias</folder>
         </item>
-        <item>
-            <name>Search Highlight</name>
+		<item>
+            <name>Updater</name>
+            <folder>updater</folder>
         </item>
-        <item>
-            <name>Forgot Manager Login</name>
+		<item>
+            <name>userHelper</name>
+        </item>
+		<item>
+            <name>evoAjax</name>
         </item>
     </category>
 
     <category>
         <name>snippets</name>
         <item>
-            <name>AjaxSearch</name>
-            <folder>ajaxSearch</folder>
+            <name>DLSitemap</name>
         </item>
         <item>
-            <name>Ditto</name>
-            <folder>ditto</folder>
+            <name>DocInfo</name>
+            <folder>docinfo</folder>
         </item>
         <item>
-        <name>eForm</name>
-        <folder>eform</folder>
+        <name>DocLister</name>
+        <folder>DocLister</folder>
         </item>
         <item>
-            <name>Jot</name>
-            <folder>jot</folder>
+            <name>FormLister</name>
+            <folder>FormLister</folder>
         </item>
         <item>
             <name>Ditto</name>
@@ -114,49 +132,26 @@
             <folder>DocLister</folder>
         </item>
         <item>
-            <name>Reflect</name>
-            <folder>reflect</folder>
+            <name>summary</name>
+            <folder>summary</folder>
         </item>
        <item>
             <name>if</name>
             <folder>if</folder>
         </item>
         <item>
-            <name>Wayfinder</name>
-            <folder>wayfinder</folder>
+            <name>ifsnippet</name>
         </item>
         <item>
-            <name>WebLogin</name>
-            <folder>weblogin</folder>
+            <name>prepareBlog</name>
         </item>
         <item>
-            <name>WebSignup</name>
+            <name>DLCrumbs</name>
         </item>
         <item>
-            <name>MemberCheck</name>
-        <folder>membercheck</folder>
+            <name>DLMenu</name>
         </item>
-        <item>
-            <name>Personalize</name>
-            <folder>personalize</folder>
-        </item>
-        <item>
-            <name>Breadcrumbs</name>
-            <folder>breadcrumbs</folder>
-        </item>
-        <item>
-            <name>FirstChildRedirect</name>
-            <folder>firstchildredirect</folder>
-        </item>
-        <item>
-            <name>UltimateParent</name>
-            <folder>ultimateparent</folder>
-        </item>
-        <item>
-            <name>ListIndexer</name>
-            <folder>listindexer</folder>
-        </item> 
-        <item>
+         <item>
             <name>phpthumb</name>
             <folder>phpthumb</folder>
         </item>  
@@ -168,13 +163,8 @@
             <name>Minimal Template</name>
         </item>
         <item>
-            <name>MODxHost</name>
-            <folder>modxhost</folder>
+            <name>EVO startup - Bootstrap</name>
         </item>
     </category>
 
-    <category>
-        <name>tvs</name>
-        <item></item>
-    </category>
 </ignorelist>
